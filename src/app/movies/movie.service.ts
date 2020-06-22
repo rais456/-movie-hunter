@@ -135,12 +135,12 @@ export class MovieService {
   private initializeMovie(): Movie {
     // Return an initialized object
     return {
-      approvalRating: null,
+      approvalRating: 0.78,
       description: "",
       director: "",
       imageurl: "",
-      mpaa: "",
-      price: null,
+      mpaa: "NR",
+      price: 9.95,
       releaseDate: "",
       starRating: null,
       title: "",
@@ -164,4 +164,6 @@ export class MovieService {
     console.error(err);
     return throwError(errorMessage);
   }
+
+
 }

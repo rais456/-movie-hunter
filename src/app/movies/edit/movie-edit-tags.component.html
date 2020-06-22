@@ -16,8 +16,8 @@
                  [(ngModel)]="movie.category"
                  name="category"
                  #categoryVar="ngModel"
-                 [ngClass]="{'is-invalid': (categoryVar.touched || 
-                                            categoryVar.dirty || movie.id !== 0) && 
+                 [ngClass]="{'is-invalid': (categoryVar.touched ||
+                                            categoryVar.dirty || !movie.id) &&
                                             !categoryVar.valid }" />
           <span class="invalid-feedback">
             <span *ngIf="categoryVar.errors?.required">
@@ -42,8 +42,8 @@
                  [(ngModel)]="newTags"
                  name="tags"
                  #tagVar="ngModel"
-                 [ngClass]="{'is-invalid': (tagVar.touched || 
-                                            tagVar.dirty || movie.id !== 0) && 
+                 [ngClass]="{'is-invalid': (tagVar.touched ||
+                                            tagVar.dirty || !movie.id) &&
                                             !tagVar.valid }" />
           <span class="invalid-feedback">
             <span *ngIf="tagVar.errors?.minlength">

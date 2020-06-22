@@ -84,16 +84,21 @@ console.log(this.movie);
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      params => {
-        const paramName = 'id';
-        const id = +params[paramName];
-        this.getMovie(id);
-      }
-    );
+    // this.route.params.subscribe(
+    //   params => {
+    //     const paramName = 'id';
+    //     const id = params[paramName];
+    //     this.getMovie(id);
+    //   }
+    // );
+    this.route.data.subscribe(data => {
+      const dataName = 'movie';
+      console.log(data[dataName])
+      this.onMovieRetrieved(data[dataName]);
+    });
   }
 
-  getMovie(id: number): void {
+  getMovie(id: string): void {
     this.movieService.getMovie(id).subscribe(
       movie => this.onMovieRetrieved(movie),
       error => this.errorMessage = error
@@ -106,7 +111,7 @@ console.log(this.movie);
     }
     this.movie = movie;
 
-    if (this.movie.id === 0) {
+    if (!this.movie.id) {
       this.pageTitle = 'Add Movie (Reactive)';
     } else {
       this.pageTitle = `Edit Movie (Reactive): ${this.movie.title}`;

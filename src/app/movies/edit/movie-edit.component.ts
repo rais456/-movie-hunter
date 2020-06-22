@@ -46,7 +46,7 @@ export class MovieEditComponent implements OnInit {
     this.movie = movie;
     // Adjust the title
    // console.log(this.movie)
-    if (this.movie.id === "") {
+    if (!this.movie.id) {
       this.pageTitle = 'Add Movie';
     } else {
       this.pageTitle = `Edit Movie: ${this.movie.title}`;
