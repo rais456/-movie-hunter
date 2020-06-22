@@ -47,21 +47,24 @@ export class MovieListComponent implements OnInit {
   }
 
   getMovies(): void {
-    this.movieService.getMovies().subscribe(data => {
-     let movie = data;
-      this.movies = this.performSearch(movie);
-      this.filteredMovies = this.performFilter(this.listFilter);
-    },
-        (error: any) => this.errorMessage = error
-      );
-    // this.movieService.getMovies()
-    //   .subscribe(
-    //     (movies: Movie[]) => {
-    //       this.movies = this.performSearch(movies);
-    //       this.filteredMovies = this.performFilter(this.listFilter);
-    //     },
+    // this.movieService.getMovies().subscribe(data => {
+    //  let movie = data;
+    //   this.movies = this.performSearch(movie);
+    //   this.filteredMovies = this.performFilter(this.listFilter);
+    // },
     //     (error: any) => this.errorMessage = error
     //   );
+    this.movieService.getMovies()
+      .subscribe(
+        (movies: Movie[]) => {
+          this.movies = this.performSearch(movies);
+          this.filteredMovies = this.performFilter(this.listFilter);
+        },
+        (error: any) => this.errorMessage = error
+      );
+
+    //this.movieService.getMovies().subscribe(res=> console.log(res));
+
   }
 
   // Local filter

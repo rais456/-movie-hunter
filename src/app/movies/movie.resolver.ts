@@ -17,6 +17,6 @@ export class MovieResolver implements Resolve<Movie> {
   resolve(route: ActivatedRouteSnapshot,
           state: RouterStateSnapshot): Observable<Movie> {
     const id = route.paramMap.get('id');
-    return this.movieService.getMovie(+id).pipe(first());
+    return this.movieService.getMovie(id).pipe(first());
   }
 }

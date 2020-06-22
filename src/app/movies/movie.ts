@@ -1,6 +1,6 @@
 /* Defines the movie entity */
 export interface Movie {
-  id: number | null;
+  id?: string;
   approvalRating: number | null;
   description: string;
   director: string;

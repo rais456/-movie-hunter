@@ -37,6 +37,7 @@ export class MovieEditComponent implements OnInit {
     // Watch for changes to the resolve data
     this.route.data.subscribe(data => {
       const dataName = 'movie';
+      console.log(data[dataName])
       this.onMovieRetrieved(data[dataName]);
     });
   }
@@ -45,7 +46,7 @@ export class MovieEditComponent implements OnInit {
     this.movie = movie;
     // Adjust the title
    // console.log(this.movie)
-    if (this.movie.id === 0) {
+    if (this.movie.id === "") {
       this.pageTitle = 'Add Movie';
     } else {
       this.pageTitle = `Edit Movie: ${this.movie.title}`;
@@ -58,7 +59,7 @@ export class MovieEditComponent implements OnInit {
       this.onSaveComplete(`${this.movie.title} was deleted`);
     } else {
       if (confirm(`Really delete the movie: ${this.movie.title}?`)) {
-        this.movieService.deleteMovie(this.movie.id).subscribe(
+        this.movieService.deleteMovie(this.movie.id).then(
           () => this.onSaveComplete(`${this.movie.title} was deleted`)
         );
       }
@@ -75,8 +76,19 @@ export class MovieEditComponent implements OnInit {
   }
 
   saveMovie(): void {
+    console.log(this.movie)
     if (this.isValid()) {
-       this.movieService.saveMovie(this.movie);
+       this.movieService.saveMovie(this.movie).then(
+          (res) => {
+            if(res) {
+              console.log(res);
+              this.onSaveComplete(`${this.movie.title} was created`)
+            } else {
+              this.onSaveComplete(`${this.movie.title} was updated`)
+            }
+          },
+          (err) => console.log(err)
+        );
     } else {
       this.errorMessage = 'Please correct the validation errors.';
     }
